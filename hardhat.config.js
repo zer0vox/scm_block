@@ -1,4 +1,12 @@
-/** @type import('hardhat/config').HardhatUserConfig */
+require('@nomiclabs/hardhat-ethers');
+require('@nomiclabs/hardhat-etherscan');
+
 module.exports = {
-  solidity: "0.8.24",
+  solidity: "0.8.13",
+  networks: {
+    // Your network configuration (if any)
+  },
+  etherscan: {
+    // Your Etherscan API key (if any)
+  }
 };

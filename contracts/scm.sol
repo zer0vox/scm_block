@@ -27,18 +27,20 @@ contract scm {
         bool isSold;
     }
 
-    function registerProduct(string memory _name, string memory _brand, string memory _serialNumber, string memory _description, string memory _image,  string memory _actor, string memory _location, string memory _timestamp) public {
-        Product storage p = products[_serialNumber];
+   function registerProduct(string memory _name, string memory _brand, string memory _serialNumber, string memory _description, string memory _image, string memory _actor, string memory _location, string memory _timestamp) public {
+    require(bytes(products[_serialNumber].serialNumber).length == 0, "Product with this serial number already exists");
 
-        p.name = _name;
-        p.brand = _brand;
-        p.serialNumber = _serialNumber;
-        p.description = _description;
-        p.image = _image;
-        p.historySize = 0;
+    Product storage p = products[_serialNumber];
 
-        addProductHistory(_serialNumber,_actor, _location, _timestamp, false);
-    }
+    p.name = _name;
+    p.brand = _brand;
+    p.serialNumber = _serialNumber;
+    p.description = _description;
+    p.image = _image;
+    p.historySize = 0;
+
+    addProductHistory(_serialNumber, _actor, _location, _timestamp, false);
+}
 
     function addProductHistory(string memory _serialNumber, string memory _actor, string memory _location, string memory _timestamp, bool _isSold) public {
         Product storage p = products[_serialNumber];
